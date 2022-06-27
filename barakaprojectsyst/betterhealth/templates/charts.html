@@ -36,7 +36,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-file-medical"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Dashboard</div>
+            <div class="sidebar-brand-text mx-3">Analysis</div>
         </a>
 
         <!-- Divider -->
@@ -49,8 +49,24 @@
                 <i class="fas fa-fw fa-user-nurse"></i>
                 <span>Add records</span></a>
         </li>
-
+        <li class="nav-item ">
+            <a class="nav-link" href=" {% url 'childform' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>Add child</span></a>
+        </li>
         <!-- Divider -->
+        <hr class="sidebar-divider">
+        <li class="nav-item ">
+            <a class="nav-link" href=" {% url 'diagnosis' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>Add Diagnosis</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href=" {% url 'viewdiagnosis' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>View Diagnosis</span></a>
+        </li>
+
         <hr class="sidebar-divider">
 
 
@@ -70,6 +86,11 @@
         <a class="nav-link" href=" {% url 'dashboard' %} ">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dataset</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=" {% url 'patients' %} ">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Patients</span></a>
       </li>
 
         <!-- Divider -->
@@ -181,52 +202,37 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Children at risk</h6>
                         </div>
+
+
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Visiting Data</th>
-                                            <th>Name</th>
-                                            <th>Age</th>
-                                            <th>Sex</th>
-                                            <th>Weight(Kg)</th>
-                                            <th>Weight Category</th>
-                                            <th>Height/Length</th>
-                                            <th>Height/Length Category</th>
-                                            <th>Exclusively breastfeeding</th>
-                                            <th>Vit A suppliment</th>
-                                            <th>Development</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Visiting Data</th>
-                                            <th>Name</th>
-                                            <th>Age</th>
-                                            <th>Sex</th>
-                                            <th>Weight(Kg)</th>
-                                            <th>Weight Category</th>
-                                            <th>Height/Length</th>
-                                            <th>Height/Length Category</th>
-                                            <th>Exclusively breastfeeding</th>
-                                            <th>Vit A suppliment</th>
-                                            <th>Development</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        
-                                      
-                                    </tbody>
-                                </table>
+                        
+                                  <form method="POST" action="{% url 'result' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                     <label for="pid">Patient ID</label>
+                                     <input type="text" class="form-control" id="pid" name="pid" placeholder="Enter Patient ID">
+                                   </div>
+                                     <div class="form-group">
+                                         <label for="age">Age</label>
+                                         <input type="text" class="form-control" id="age" name="age" placeholder="Enter Age">
+                                       </div>
+                                       <div class="form-group">
+                                         <label for="weight">Weight</label>
+                                         <input type="text" class="form-control" id="weight" name = "weight" placeholder="Enter Weight">
+                                       </div>
+                                       <div class="form-group">
+                                         <label for="height">Height</label>
+                                         <input type="text" class="form-control" id="height" name="height" placeholder="Enter Height">
+                                       </div>
+                                 
+                                
+                                         <button type="submit" class="btn btn-primary">Submit</button>
+                                     </div>
+                     
+                                   </form>
+                           
+                               
                             </div>
                         </div>
                     </div>

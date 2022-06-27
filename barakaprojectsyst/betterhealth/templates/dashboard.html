@@ -37,7 +37,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-file-medical"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Dashboard</div>
+                <div class="sidebar-brand-text mx-3">Dataset</div>
             </a>
 
             <!-- Divider -->
@@ -51,8 +51,24 @@
                 <i class="fas fa-fw fa-user-nurse"></i>
                 <span>Add records</span></a>
         </li>
-
+        <li class="nav-item ">
+            <a class="nav-link" href=" {% url 'childform' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>Add child</span></a>
+        </li>
         <!-- Divider -->
+        <hr class="sidebar-divider">
+        <li class="nav-item ">
+            <a class="nav-link" href=" {% url 'diagnosis' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>Add Diagnosis</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href=" {% url 'viewdiagnosis' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>View Diagnosis</span></a>
+        </li>
+
         <hr class="sidebar-divider">
 
 
@@ -72,6 +88,11 @@
         <a class="nav-link" href=" {% url 'dashboard' %} ">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dataset</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=" {% url 'patients' %} ">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Patients</span></a>
       </li>
      
             <!-- Divider -->
@@ -191,48 +212,55 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                       
                         <thead>
                             <tr>
-                                <th>Visiting Data</th>
+                                <th>Patient ID</th>
+                                <th>Visiting Date</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Sex</th>
                                 <th>Weight(Kg)</th>
                                 <th>Weight Category</th>
-                                <th>Height/Length</th>
-                                <th>Height/Length Category</th>
-                                <th>Exclusively breastfeeding</th>
-                                <th>Vit A suppliment</th>
-                                <th>Development</th>
+                                <th>Height(cm)</th>
+                                <th>Height Category</th>
+                               
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Visiting Data</th>
+                                
+                                <th>Patient ID</th>
+                                <th>Visiting Date</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Sex</th>
                                 <th>Weight(Kg)</th>
                                 <th>Weight Category</th>
-                                <th>Height/Length</th>
-                                <th>Height/Length Category</th>
-                                <th>Exclusively breastfeeding</th>
-                                <th>Vit A suppliment</th>
-                                <th>Development</th>
+                                <th>Height(cm)</th>
+                                <th>Height Category</th>
+                               
                             </tr>
                         </tfoot>
                         <tbody>
+                            {% for records in record %}
                             <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
+                              
+                                <td>{{ records.pid }}</td>
+                                <td>{{ records.date }}</td>
+                                <td>{{ records.fname }}</td>
+                                <td>{{ records.age }}</td>
+                                <td>{{ records.sex }}</td>
+                                <td>{{ records.weight }}</td>
+                                <td>{{ records.wCategory }}</td>
+                                <td>{{ records.height }}</td>
+                                <td>{{ records.hCategory }}</td>
+                              
                             </tr>
-                            
+                            {% endfor %}
                           
                         </tbody>
+                    
                     </table>
                 </div>
             </div>

@@ -37,7 +37,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-file-medical"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Dashboard</div>
+            <div class="sidebar-brand-text mx-3">New Record</div>
         </a>
 
         <!-- Divider -->
@@ -52,7 +52,26 @@
                 <span>Add records</span></a>
         </li>
 
+        <li class="nav-item ">
+            <a class="nav-link" href=" {% url 'childform' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>Add child</span></a>
+        </li>
+
+
         <!-- Divider -->
+        <hr class="sidebar-divider">
+        <li class="nav-item ">
+            <a class="nav-link" href=" {% url 'diagnosis' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>Add Diagnosis</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href=" {% url 'viewdiagnosis' %} ">
+                <i class="fas fa-fw fa-user-nurse"></i>
+                <span>View Diagnosis</span></a>
+        </li>
+
         <hr class="sidebar-divider">
 
 
@@ -73,7 +92,11 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dataset</span></a>
       </li>
-
+      <li class="nav-item">
+        <a class="nav-link" href=" {% url 'patients' %} ">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Patients</span></a>
+      </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
@@ -186,34 +209,38 @@
 
                             <form method="POST" action="{% url 'add_record_form_submission' %}" enctype="multipart/form-data">
                                {% csrf_token %}
+                               <div class="form-group">
+                                <label for="pid">Patient ID</label>
+                                <input type="text" class="form-control" id="pid" name="pid" placeholder="Enter Patient ID">
+                              </div>
                                 <div class="form-group">
                                     <label for="date">Visiting Date</label>
-                                    <input type="date" class="form-control" id="date" placeholder="Enter Date">
+                                    <input type="date" class="form-control" id="date" name="date" placeholder="Enter Date">
                                   </div>
                                   <div class="form-group">
                                     <label for="fname">Full Name</label>
-                                    <input type="text" class="form-control" id="fname" placeholder="Enter Full Name">
+                                    <input type="text" class="form-control" id="fname" name = "fname" placeholder="Enter Full Name">
                                   </div>
                             
                                   <div class="form-group">
                                     <label for="age">Age</label>
-                                    <input type="text" class="form-control" id="age" placeholder="Enter current age">
+                                    <input type="text" class="form-control" id="age" name="age" placeholder="Enter current age">
                                   </div>
                                   <div class="form-group">
                                     <label for="sex">Select Gender</label>
-                                    <select class="form-control" id="sex">
-                                      <option>F</option>
-                                      <option>M</option>
+                                    <select class="form-control" name="sex" id="sex">
+                                      <option>Female</option>
+                                      <option>Male</option>
                                     
                                     </select>
                                   </div>
                                   <div class="form-group">
                                     <label for="weight">Weight in Kg</label>
-                                    <input type="text" class="form-control" id="weight" placeholder="Enter weight">
+                                    <input type="text" class="form-control" id="weight" name="weight" placeholder="Enter weight(kg)">
                                   </div>
                                   <div class="form-group">
-                                    <label for="wCategory">Select Weight Category(1= Normal, 2=UW, 3=SUW, 4=OW, 5=Obese)</label>
-                                    <select class="form-control" id="wCategory">
+                                    <label for="wCategory">Select Weight Category (1=Normal, 2=UW, 3=SUW, 4=OW, 5=Obese)</label>
+                                    <select class="form-control" id="wCategory" name='wCategory'>
                                       <option>1</option>
                                       <option>2</option>
                                       <option>3</option>
@@ -224,46 +251,19 @@
                                   </div>
                                  
                                   <div class="form-group">
-                                    <label for="height">Height/ Length</label>
-                                    <input type="text" class="form-control" id="height" placeholder="Enter Height/ Length(cm) taken">
+                                    <label for="height">Height</label>
+                                    <input type="text" class="form-control" id="height" name="height" placeholder="Enter Height(cm)">
                                   </div>
                                   <div class="form-group">
-                                    <label for="hCategory">Select Height/Length category (1= Normal, 2=Stunted, 3=Sev. Stunted)</label>
-                                    <select class="form-control" id="hCategory">
+                                    <label for="hCategory">Select Heightcategory (1=Normal, 2=Stunted, 3=Sev. Stunted)</label>
+                                    <select class="form-control" id="hCategory" name="hCategory">
                                       <option>1</option>
                                       <option>2</option>
                                       <option>3</option>
             
                                     </select>
                                   </div>
-                                  <div class="form-group">
-                                    <label for="bFeeding">Exclusively Breastfeeding</label>
-                                    <select class="form-control" id="bFeeding">
-                                      <option>Y</option>
-                                      <option>N</option>
-                                    
-                                    </select>
-                                  </div>
                                 
-                                    <div class="form-group">
-                                    <label for="suppliment">Vit A supplementation (1=6-11 months, 2= 12-59 months,  3=Not Supplimented)</label>
-                                    <select class="form-control" id="suppliment">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    
-                                    </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="developement">Child Development(1= Head control, 2= sitting, 3= talking)</label>
-                                        <select class="form-control" id="development">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        
-                                        </select>
-                                    </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                 
